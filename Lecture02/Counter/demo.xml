@@ -1,0 +1,15 @@
+<MyElement 
+    width="20dp"
+    height = "20dp"
+    color="red">
+
+    <ChildElement
+        width="10dp"
+        height="10dp"
+        color="blue">
+
+        <InnerChildElement/>
+
+    </ChildElement>
+
+</MyElement>

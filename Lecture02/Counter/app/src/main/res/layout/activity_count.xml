@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Count"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:id="@+id/tvCount"/>
+
+    <Button
+        android:onClick="decrement"
+        android:id="@+id/increment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textSize="20sp"
+        android:layout_below="@id/tvCount"
+        android:layout_toLeftOf="@id/tvCount"/>
+
+    <Button
+        android:onClick="decrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/decrement"
+        android:layout_toRightOf="@id/tvCount"
+        android:layout_below="@id/tvCount"
+        android:text="+"
+        android:textSize="20sp"/>
+
+
+    <Button
+        android:onClick="decrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnReset"
+        android:text="Reset"
+        android:textSize="20sp"
+        android:layout_below="@id/decrement"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
