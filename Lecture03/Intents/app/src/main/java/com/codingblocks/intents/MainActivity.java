@@ -1,6 +1,8 @@
 package com.codingblocks.intents;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +40,30 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(MainActivity.this, "Button Clicked!!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(MainActivity.this, OtherActivity.class);
                 startActivity(i);
+            }
+        });
+        Button btnDialog = findViewById(R.id.btnDialog);
+        btnDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("SOME ALERT")
+                        .setMessage("This to tell something happened.")
+                        .setCancelable(false)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "OK CLICKED", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "CANCEL CLICKED", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
             }
         });
     }
