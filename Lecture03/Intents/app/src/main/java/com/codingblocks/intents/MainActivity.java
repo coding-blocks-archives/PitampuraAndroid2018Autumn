@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Toast.makeText(MainActivity.this, "Button Clicked!!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(MainActivity.this, OtherActivity.class);
+                i.putExtra("hello", "world");
                 startActivity(i);
             }
         });
