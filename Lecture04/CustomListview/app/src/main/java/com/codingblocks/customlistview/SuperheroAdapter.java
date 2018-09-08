@@ -1,6 +1,7 @@
 package com.codingblocks.customlistview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class SuperheroAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+//        TextView power, name, universe;
 //        LayoutInflater layoutInflater = (LayoutInflater)
 //                ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

@@ -1,9 +1,11 @@
 package com.codingblocks.notes;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,10 +34,18 @@ public class NotesAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+
+//        Log.e("TAG", "getView: " + convertView);
 
         LayoutInflater li = LayoutInflater.from(parent.getContext());
-        View inflatedView = li.inflate(R.layout.item_row, parent, false);
+
+        View inflatedView;
+
+        if (convertView == null)
+            inflatedView = li.inflate(R.layout.item_row, parent, false);
+        else
+            inflatedView = convertView;
 
 //        Note currentNote = notes.get(position);
         Note currentNote = getItem(position);
@@ -43,6 +53,16 @@ public class NotesAdapter extends BaseAdapter {
         TextView noteTitle, noteTime;
         noteTitle = inflatedView.findViewById(R.id.textViewTitle);
         noteTime = inflatedView.findViewById(R.id.textViewTime);
+
+        Button btnDelete = inflatedView.findViewById(R.id.btnDelete);
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notes.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
         noteTitle.setText(currentNote.getTitle());
         noteTime.setText(currentNote.getTime());
