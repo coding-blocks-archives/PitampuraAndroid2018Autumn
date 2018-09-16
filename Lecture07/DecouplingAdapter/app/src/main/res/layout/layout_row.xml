@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="Name"
+            android:id="@+id/superheroName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="24sp" />
+        <TextView
+            android:text="Universe"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:id="@+id/superheroUniverse"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <TextView
+        android:text="Power"
+        android:textStyle="bold"
+        android:id="@+id/superheroPower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+</LinearLayout>
