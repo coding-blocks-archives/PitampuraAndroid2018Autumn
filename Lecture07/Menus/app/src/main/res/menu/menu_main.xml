@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:orderInCategory="3"
+        android:title="Settings"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="5"
+        android:title="Help"
+        android:icon="@drawable/ic_help"
+        app:showAsAction="ifRoom" />
+
+    <!--<item-->
+    <!--android:id="@+id/action_extra"-->
+    <!--android:title="Exta">-->
+
+    <!--<menu>-->
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_about"
+        android:orderInCategory="1"
+        android:title="About" />
+
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_refresh"
+        android:title="Refresh" />
+    <!--</menu>-->
+    <!--</item>-->
+</menu>

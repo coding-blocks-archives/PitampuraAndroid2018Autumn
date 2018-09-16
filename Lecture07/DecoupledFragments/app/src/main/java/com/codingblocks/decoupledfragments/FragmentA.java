@@ -1,5 +1,6 @@
 package com.codingblocks.decoupledfragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 public class FragmentA extends Fragment {
 
@@ -20,7 +22,7 @@ public class FragmentA extends Fragment {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         final EditText editText = view.findViewById(R.id.etFragA);
@@ -29,8 +31,8 @@ public class FragmentA extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String input = editText.getText().toString();
-                //TODO
+                Communicator communicator = (Communicator) getActivity();
+                communicator.handleClick(editText.getText().toString());
             }
         });
 
