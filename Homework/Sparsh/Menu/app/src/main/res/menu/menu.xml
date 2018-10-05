@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/actionHome"
+        android:orderInCategory="1"
+        android:title="Home"/>
+    <item android:id="@+id/actionRefresh"
+        android:orderInCategory="2"
+        android:title="Refresh"/>
+    <item android:id="@+id/actionSettings"
+        android:orderInCategory="3"
+        android:title="Settings"/>
+    <item android:id="@+id/actionHelp"
+        android:orderInCategory="4"
+        android:title="Help"/>
+    <item android:id="@+id/actionAbout"
+        android:orderInCategory="5"
+        android:title="About"/>
+
+</menu>
