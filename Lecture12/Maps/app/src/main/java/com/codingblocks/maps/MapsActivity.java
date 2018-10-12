@@ -31,27 +31,30 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String TAG = "MainActivity";
     LocationManager lm;
 
+    GoogleMap map;
+
+    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+    SupportMapFragment mapFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             //do whatever you want with the location
-            startLocationUpdates(lm);
-        } else {
-            //request the location
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION
                     },
                     12345);
+
+        } else {
+            mapFragment.getMapAsync(this);
         }
     }
 
@@ -61,46 +64,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this,
                 R.raw.style_json));
 
-        final LatLng delhi = new LatLng(28.7041, 77.1025);
+        map = googleMap;
 
-        MarkerOptions markerOptions = new MarkerOptions()
-                .title("New Delhi")
-                .position(delhi)
-                .draggable(true);
+        startLocationUpdates((LocationManager) getSystemService(LOCATION_SERVICE));
 
-        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-
-            LatLng initialPos = delhi;
-
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                LatLng finalPos = marker.getPosition();
-
-                googleMap.addPolyline(new PolylineOptions()
-                        .add(initialPos, finalPos)
-                        .color(Color.rgb(54, 178, 74))
-                        .width(1.5f));
-
-                googleMap.animateCamera(CameraUpdateFactory.newLatLng(finalPos));
-                initialPos = finalPos;
-
-            }
-        });
-
-       googleMap.addMarker(markerOptions);
-
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(delhi, 9));
-//
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(delhi,9));
     }
 
     @Override
@@ -111,11 +78,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //Handle location
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     //attach the location listener
-                    startLocationUpdates(lm);
+                    mapFragment.getMapAsync(this);
                 }
                 break;
         }
     }
+
+    LatLng lastPos = null;
+    Marker lastMarker = null;
 
     @Override
     public void onLocationChanged(Location location) {
@@ -125,7 +95,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Draw a path from the last pos to the new lat/lng
         //(Optional) Remove the marker from the last lat/lng
 
+        LatLng currentPos = new LatLng(location.getLatitude(), location.getLongitude());
 
+        if (lastPos == null) lastPos = currentPos;
+
+        map.animateCamera(CameraUpdateFactory.newLatLng(currentPos));
+        Marker currentMarker = map.addMarker(new MarkerOptions().position(currentPos));
+
+        map.addPolyline(new PolylineOptions().add(lastPos, currentPos));
+
+        if (lastMarker != null) {
+            lastMarker.remove();
+        }
+
+        lastMarker = currentMarker;
+        lastPos = currentPos;
     }
 
     @Override
