@@ -15,16 +15,21 @@ public class MainActivity extends AppCompatActivity {
 
         NotesDatabaseHelper notesDatabaseHelper = new NotesDatabaseHelper(this);
 
-        notesDatabaseHelper.insert(new Note("Hello", "First Entry", "" + System.currentTimeMillis(), 0));
-        notesDatabaseHelper.insert(new Note("Hello", "First Entry", "" + System.currentTimeMillis(), 0));
-        notesDatabaseHelper.insert(new Note("Hello", "First Entry", "" + System.currentTimeMillis(), 0));
-        notesDatabaseHelper.insert(new Note("Hello", "First Entry", "" + System.currentTimeMillis(), 0));
-        notesDatabaseHelper.insert(new Note("Hello", "First Entry", "" + System.currentTimeMillis(), 0));
+        //Clicked the add button
 
+        Note note = new Note("Hello", "First Entry", "" + System.currentTimeMillis(), 0);
+
+        //Insert the note into the db
+        Note insertedNote = notesDatabaseHelper.insert(note);
+
+        //Get the inserted note back from the db
+//        Note insertedNote = notesDatabaseHelper.getNoteById(insertedID);
+
+        //Add the retrieved note to your ArrayList and notify the adapter
 
         ArrayList<Note> notes = notesDatabaseHelper.getAllNotes();
 
-        Note note = notesDatabaseHelper.getNoteById(2);
+//        Note note = notesDatabaseHelper.getNoteById(2L);
 
         Log.e("TAG", "onCreate: " + note.getId());
 

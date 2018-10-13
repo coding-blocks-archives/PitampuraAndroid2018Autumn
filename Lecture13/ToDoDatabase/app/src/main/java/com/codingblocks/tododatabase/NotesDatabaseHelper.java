@@ -24,7 +24,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
                 "isDone INTEGER);");
     }
 
-    public void insert(Note note) {
+    public Note insert(Note note) {
         //Insert the note into the table
         ContentValues contentValues = new ContentValues();
 
@@ -33,9 +33,13 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("timeStamp", note.getTimeStamp());
         contentValues.put("isDone", note.getIsDone());
 
-        getWritableDatabase().insert("task_table",
+        long id = getWritableDatabase().insert("task_table",
                 null
                 , contentValues);
+
+
+
+        return getNoteById(id);
     }
 
     public void updateNote(Note note) {
@@ -60,7 +64,7 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{note.getId().toString()});
     }
 
-    public Note getNoteById(Integer noteId) {
+    public Note getNoteById(Long noteId) {
 
         Note note = null;
 
@@ -117,14 +121,6 @@ public class NotesDatabaseHelper extends SQLiteOpenHelper {
 
         c.close();
         return notes;
-    }
-
-    public void deleteNote(Integer id) {
-        //Delete the note from the table
-    }
-
-    public void update(Note noteToBeUpdated) {
-
     }
 
     @Override
