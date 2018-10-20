@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Set adapter to your recyclerview
 
-        mainActivityViewModel.getLiveNotes().observe(this, new Observer<List<Note>>() {
+        LiveData<List<Note>> liveNotes = mainActivityViewModel.getLiveNotes();
+
+        liveNotes.observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable List<Note> notes) {
                 //Set the list to your adapter
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        LiveData<List<Note>> liveNotes = database.getNotesDao().getAllNotes();
+//        LiveData<List<Note>> liveNotes = database.getNotesDao().getAllNotes();
 
 //        List<Note> notes = liveNotes.getValue();
 

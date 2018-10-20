@@ -19,11 +19,11 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Note>> getLiveNotes() {
-
-        NotesDao notesDao = NoteApplication.getNoteDatabase(getApplication())
-                .getNotesDao();
-
-        liveNotes = notesDao.getAllNotes();
+        if (liveNotes == null) {
+            NotesDao notesDao = NoteApplication.getNoteDatabase(getApplication())
+                    .getNotesDao();
+            liveNotes = notesDao.getAllNotes();
+        }
 
         return liveNotes;
     }
