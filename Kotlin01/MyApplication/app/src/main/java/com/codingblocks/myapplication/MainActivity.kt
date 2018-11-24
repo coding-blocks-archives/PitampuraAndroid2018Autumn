@@ -1,5 +1,6 @@
 package com.codingblocks.myapplication
 
+import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,32 @@ class MainActivity : AppCompatActivity() {
             "New Text",
             Color.BLUE,
             23.5f
+        )
+
+        val i = Intent(this, MainActivity::class.java)
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        i.putExtra("result", 10)
+        i.putExtra("value", "something")
+        startActivity(i)
+
+        with(Intent(this, MainActivity::class.java)) {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            putExtra("result", 10)
+            putExtra("value", "something")
+            startActivity(this)
+
+        }
+
+
+        startActivity(
+            Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                putExtra("result", 10)
+                putExtra("value", "something")
+            }
         )
 
 
